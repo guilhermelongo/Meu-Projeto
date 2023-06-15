@@ -31,8 +31,34 @@ app.MapGet("/getprod", (HttpRequest request) =>{
     return request.Headers["product-code"].ToString();
 });
 
+app.MapPost("/SaveprodList", (Prod product) => {
+  ProductRepository.AddProd(product);
+});
+
+app.MapGet("/getById/{Code}", ([FromRoute] string Code)=>{
+    
+    var produto = ProductRepository.GetProd(Code);
+    return produto;
+});
+
+
 app.Run();
 
+public static class ProductRepository
+{
+  public static List<Prod> MinhaLista { get; set; }
+
+  public static void AddProd(Prod produto)
+  {
+    MinhaLista = new List<Prod>();
+    MinhaLista.Add(produto);
+  }
+
+  public static Prod GetProd(string code)
+  {
+   return MinhaLista.First(p => p.Cod == code);
+  }
+}
 public class Prod
 {
 public string Name { get; set; }
