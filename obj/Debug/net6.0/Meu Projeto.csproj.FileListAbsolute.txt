@@ -1,0 +1,21 @@
+C:\Users\longo\Meu Projeto\bin\Debug\net6.0\Meu Projeto.exe
+C:\Users\longo\Meu Projeto\bin\Debug\net6.0\Meu Projeto.deps.json
+C:\Users\longo\Meu Projeto\bin\Debug\net6.0\Meu Projeto.runtimeconfig.json
+C:\Users\longo\Meu Projeto\bin\Debug\net6.0\Meu Projeto.dll
+C:\Users\longo\Meu Projeto\bin\Debug\net6.0\Meu Projeto.pdb
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.csproj.AssemblyReference.cache
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.AssemblyInfoInputs.cache
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.AssemblyInfo.cs
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.csproj.CoreCompileInputs.cache
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.dll
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\refint\Meu Projeto.dll
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.pdb
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.genruntimeconfig.cache
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\ref\Meu Projeto.dll
+C:\Users\longo\Meu Projeto\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\longo\Meu Projeto\bin\Debug\net6.0\appsettings.json
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\Meu Projeto.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\longo\Meu Projeto\obj\Debug\net6.0\scopedcss\bundle\Meu Projeto.styles.css
