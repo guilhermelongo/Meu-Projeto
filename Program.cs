@@ -27,21 +27,36 @@ return Code;
 });
 
 //Usando Request Header key/value //tem q ser o mesmo nome daqui na key "product-code"
-app.MapGet("/getprod", (HttpRequest request) =>{
+app.MapGet("/prod", (HttpRequest request) =>{
     return request.Headers["product-code"].ToString();
 });
 
-app.MapPost("/SaveprodList", (Prod product) => {
+//Insere Produto post
+app.MapPost("/prod", (Prod product) => {
   ProductRepository.AddProd(product);
+ return Results.Created($"/prod/{product.Cod}", product.Cod );
 });
-
-app.MapGet("/getById/{Code}", ([FromRoute] string Code)=>{
+//Getby ID
+app.MapGet("/prod/{Code}", ([FromRoute] string Code)=>{
     
     var produto = ProductRepository.GetProd(Code);
-    return produto;
+    if (produto != null)
+    return Results.Ok(produto);
+    else
+    return Results.NotFound();
 });
-
-
+//Delete
+app.MapDelete("/prod/{Code}",([FromRoute] string Code) =>{
+   var deleteprod = ProductRepository.GetProd(Code);
+       ProductRepository.DeleteProd(deleteprod);
+       return Results.Ok();
+});
+//Update
+app.MapPut("/prod",(Prod produto) => {
+    var prodSaved = ProductRepository.GetProd(produto.Cod);
+     prodSaved.Name = produto.Name;
+     return Results.Ok();
+});
 app.Run();
 
 public static class ProductRepository
@@ -56,7 +71,13 @@ public static class ProductRepository
 
   public static Prod GetProd(string code)
   {
-   return MinhaLista.First(p => p.Cod == code);
+   return MinhaLista.FirstOrDefault(p => p.Cod == code);
+  }
+
+  public static Prod DeleteProd(Prod produto){
+    MinhaLista.Remove(produto);
+    return produto;
+
   }
 }
 public class Prod
