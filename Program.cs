@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ApplicationDbContext>();
 var app = builder.Build();
+var configuration = app.Configuration;
+ProductRepository.init(configuration);
 
 app.MapGet("/", () => "Hello World!");
 
@@ -16,6 +20,10 @@ response.Headers.Add("Teste", "Testando header");
 return "Todo mundo é gay";
 });
 
+//get para saber a base de dados q estamos usando
+app.MapGet("/Configuratio/database", (IConfiguration configuration) =>{
+return Results.Ok(configuration["database:connection"]);
+});
 //FromQuery url
 app.MapGet("/getproduct",([FromQuery] string dateStart, [FromQuery] string dateEnd) =>{
   return dateStart + " - " + dateEnd;
@@ -61,12 +69,15 @@ app.Run();
 
 public static class ProductRepository
 {
-  public static List<Prod> MinhaLista { get; set; }
+  public static List<Prod> MinhaLista { get; set; } = MinhaLista = new List<Prod>();
 
+  public static void init(IConfiguration configuration){
+    var products = configuration.GetSection("Prod").Get<List<Prod>>();
+    MinhaLista = products;
+  }
   public static void AddProd(Prod produto)
   {
-    MinhaLista = new List<Prod>();
-    MinhaLista.Add(produto);
+        MinhaLista.Add(produto);
   }
 
   public static Prod GetProd(string code)
@@ -82,6 +93,17 @@ public static class ProductRepository
 }
 public class Prod
 {
+  public int Id { get; set; }
 public string Name { get; set; }
 public string Cod { get; set; }
+}
+
+public class ApplicationDbContext : DbContext
+{
+  public DbSet<Prod> Products { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+    => options.UseSqlServer("Server=localhost ;Database=mysql_data;User ID=support;Password=Kimetsu-+123;Trusted_Connection=False;TrustServerCertificate=True");
+    
+
 }
