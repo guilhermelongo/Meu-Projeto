@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>();
@@ -93,17 +95,31 @@ public static class ProductRepository
 }
 public class Prod
 {
-  public int Id { get; set; }
+
+public int Id { get; set; }
 public string Name { get; set; }
 public string Cod { get; set; }
 }
 
 public class ApplicationDbContext : DbContext
 {
-  public DbSet<Prod> Products { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-    => options.UseSqlServer("Server=localhost ;Database=mysql_data;User ID=support;Password=Kimetsu-+123;Trusted_Connection=False;TrustServerCertificate=True");
+    public DbSet<Prod> Products{get;set;}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+
     
+    // var connectionString = "Server=192.168.0.113;Database=mysql;Uid=root;Pwd=Kimetsu-+123;";
+var connectionString = "Server=192.168.0.113;Port=33306;Database=MyDb;Uid=root;Pwd=Kimetsu-+123;";
 
+ 
+    
+    optionsBuilder.UseMySql(connectionString, mysqlOptions =>
+    {
+           mysqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5, // Número máximo de tentativas
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null// Atraso máximo entre as tentativas
+            );
+    });   
+  }     
 }
