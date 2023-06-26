@@ -93,12 +93,26 @@ public static class ProductRepository
 
   }
 }
+public class Category{
+  public int Id { get; set; }
+  public string Name { get; set; }
+}
+public class Tag{
+  public int Id { get; set; }
+  public string Name { get; set; }
+  public int ProductId { get; set; }
+}
 public class Prod
 {
+  public Category Category { get; set; }
+  public int CategoryId {get; set;}
 
+  public List<Tag> Tags { get; set; }
 public int Id { get; set; }
 public string Name { get; set; }
 public string Cod { get; set; }
+
+public string Description {get; set;}
 }
 
 public class ApplicationDbContext : DbContext
@@ -108,7 +122,6 @@ public class ApplicationDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
 
     
-    // var connectionString = "Server=192.168.0.113;Database=mysql;Uid=root;Pwd=Kimetsu-+123;";
 var connectionString = "Server=192.168.0.113;Port=33306;Database=MyDb;Uid=root;Pwd=Kimetsu-+123;";
 
  
